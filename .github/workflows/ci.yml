@@ -15,10 +15,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install bats
+    - name: Install homebrew
       run: |
-        git clone https://github.com/bats-core/bats-core
-        bash ./bats-core/install.sh /usr/local
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    - name: unlink bats
+      run: |
+        # need to unlink original bats to use bats core
+        brew unlink bats
+      if: matrix.os == 'macOS-latest'
+    - name: install bats-core
+      run: |
+        brew install --force bats-core
     - name: install cookiecutter
       run: |
         pip install cookiecutter
