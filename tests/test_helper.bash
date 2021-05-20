@@ -134,9 +134,9 @@ setup() {
     load "$example_dir/utils.sh"
 }
 
-teardown() {
-    # if [[ "${#BATS_TEST_NAMES[@]}" -eq "$BATS_TEST_NUMBER" ]]; then
-    #     # TODO: fix teardown, failing multiple runs
-    #     rm -rf "../alphabet"
-    # fi
-}
+# teardown() {
+#     if [[ "${#BATS_TEST_NAMES[@]}" -eq "$BATS_TEST_NUMBER" ]]; then
+#         # TODO: fix teardown, failing multiple runs
+#         rm -rf "../alphabet"
+#     fi
+# }
