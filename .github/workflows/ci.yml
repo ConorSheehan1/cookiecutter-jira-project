@@ -15,13 +15,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install homebrew
+    - name: Install bats
       run: |
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    - name: unlink bats
-      run: |
-        # need to unlink original bats to use bats core
-        brew unlink bats && brew install --force bats-core
+        git clone https://github.com/bats-core/bats-core
+        bash ./bats-core/install.sh /usr/local
     - name: install cookiecutter
       run: |
         pip install cookiecutter
@@ -29,4 +26,3 @@ jobs:
       run: |
         # bats -r does not follow symlinks, pass paths explicitly using find
         bats $(find ./tests -name '*.bats' | sort)
-
