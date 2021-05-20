@@ -120,19 +120,27 @@ run_relative() {
 setup() {
     example_dir="alphabet"
 
+    # only run before first test
     if [[ "$BATS_TEST_NUMBER" -eq 1 ]]; then
         # check if dir already exists, if it does delete it
         if [ -d "$example_dir" ]; then
             rm -rf "$example_dir"
         fi
+        # setup example project so utils.sh exists and can be tested
         poetry run cookiecutter . --overwrite-if-exists --no-input base_dir="$PWD"
     fi
+
+    # stub code, used in utils.sh
+    alias code='echo'
+
+    # load functions to be tested
     load "$example_dir/utils.sh"
 }
 
-# teardown() {
-#     if [[ "${#BATS_TEST_NAMES[@]}" -eq "$BATS_TEST_NUMBER" ]]; then
-#         # TODO: fix teardown, failing multiple runs
-#         rm -rf "../alphabet"
-#     fi
-# }
+teardown() {
+    unalias code
+    # if [[ "${#BATS_TEST_NAMES[@]}" -eq "$BATS_TEST_NUMBER" ]]; then
+    #     # TODO: fix teardown, failing multiple runs
+    #     rm -rf "../alphabet"
+    # fi
+}
