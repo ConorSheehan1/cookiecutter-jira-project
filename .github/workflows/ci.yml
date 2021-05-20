@@ -15,17 +15,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Install homebrew
-      run: |
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    - name: unlink bats
-      run: |
-        # need to unlink original bats to use bats core
-        brew unlink bats
-      if: matrix.os == 'macOS-latest'
-    - name: install bats-core
-      run: |
-        brew install --force bats-core
     - name: Install Poetry
       run: |
         python -m pip install --upgrade pip
