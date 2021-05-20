@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 # must run `poetry run cookiecutter . --overwrite-if-exists --no-input base_dir="$PWD"` first
-load "test_helper.bash"
+load "test_helper"
 
 @test "goto_alphabet_issues" {
   goto_alphabet_issues
