@@ -26,9 +26,13 @@ jobs:
     - name: install bats-core
       run: |
         brew install --force bats-core
-    - name: install cookiecutter
+    - name: Install Poetry
       run: |
-        pip install cookiecutter
+        python -m pip install --upgrade pip
+        pip install poetry
+    - name: Install python packages
+      run: |
+        poetry install
     - name: Test
       run: |
         # bats -r does not follow symlinks, pass paths explicitly using find
