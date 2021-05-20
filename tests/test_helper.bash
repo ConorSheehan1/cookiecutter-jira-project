@@ -130,15 +130,11 @@ setup() {
         poetry run cookiecutter . --overwrite-if-exists --no-input base_dir="$PWD"
     fi
 
-    # stub code, used in utils.sh
-    alias code='echo'
-
     # load functions to be tested
     load "$example_dir/utils.sh"
 }
 
 teardown() {
-    unalias code
     # if [[ "${#BATS_TEST_NAMES[@]}" -eq "$BATS_TEST_NUMBER" ]]; then
     #     # TODO: fix teardown, failing multiple runs
     #     rm -rf "../alphabet"
