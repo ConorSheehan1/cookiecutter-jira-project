@@ -8,7 +8,7 @@ A [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating 
 To create a new project using this cookiecutter template:
 
 ```bash
-pip install cookiecutter poetry
+pip install cookiecutter
 cookiecutter gh:ConorSheehan1/cookiecutter-jira-project
 ```
 
@@ -40,9 +40,5 @@ Provides the following functions
     1. create retro from template
     1. open in vscode
 
-## Local/Dev install
-```bash
-poetry install
-poetry run cookiecutter .
-# poetry run cookiecutter . --overwrite-if-exists --no-input
-```
+# Development
+See [dev.md](./dev.md)
