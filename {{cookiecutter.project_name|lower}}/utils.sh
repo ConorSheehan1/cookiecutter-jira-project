@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# template version 0.1.0
+
 {{cookiecutter.project_name|lower}}_repo_dir="{{cookiecutter.repo_dir}}"
 # TODO: get basedir instead of passing in as arg
 {{cookiecutter.project_name|lower}}_issue_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/issues"
