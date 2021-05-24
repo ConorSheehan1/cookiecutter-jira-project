@@ -8,8 +8,6 @@
 {{cookiecutter.project_name|lower}}_issue_log="${{cookiecutter.project_name|lower}}_issue_dir/issue_log"
 {{cookiecutter.project_name|lower}}_retro_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/retro"
 
-code_editor="${VISUAL:-${EDITOR:-{{cookiecutter.editor}}}}"
-
 goto_{{cookiecutter.project_name|lower}}_issues() {
   cd "${{cookiecutter.project_name|lower}}_issue_dir" || exit
 }
@@ -45,7 +43,7 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
   mkdir "$new_issue_dir/screenshots"
   touch "$new_issue_tech_design"
   # open dir to see all files too
-  $code_editor "$new_issue_dir" "$new_issue_tech_design"
+  {{cookiecutter.editor}} "$new_issue_dir" "$new_issue_tech_design"
 }
 
 {{cookiecutter.project_name|lower}}_new_retro() {
@@ -61,5 +59,5 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
   fi
   cp "$retro_template" "$new_retro"
   # open dir to see all files too
-  $code_editor "${{cookiecutter.project_name|lower}}_retro_dir" "$new_retro"
+  {{cookiecutter.editor}} "${{cookiecutter.project_name|lower}}_retro_dir" "$new_retro"
 }

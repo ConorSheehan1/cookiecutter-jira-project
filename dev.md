@@ -8,6 +8,9 @@ poetry run cookiecutter .
 # Tests
 ```bash
 bats $(find ./tests -name '*.bats' | sort)
+
+# alias for the above, can also be used
+poetry run task tests
 ```
 
 # Version management
