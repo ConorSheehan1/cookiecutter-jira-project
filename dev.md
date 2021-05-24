@@ -8,5 +8,8 @@ poetry run cookiecutter .
 # Version management
 ```bash
 # pass args e.g. patch, minor, major, choose to commit changes or not
-poetry run bumpversion --commit --tag patch
+poetry run bumpversion patch
+
+# to commit changes and create tag immediately
+# poetry run bumpversion --commit --tag patch
 ```
