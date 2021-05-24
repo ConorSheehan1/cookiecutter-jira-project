@@ -5,6 +5,11 @@ poetry run cookiecutter .
 # poetry run cookiecutter . --overwrite-if-exists --no-input
 ```
 
+# Tests
+```bash
+bats $(find ./tests -name '*.bats' | sort)
+```
+
 # Version management
 ```bash
 # pass args e.g. patch, minor, major, choose to commit changes or not

@@ -25,13 +25,14 @@ jobs:
       matrix:
         # os: [ubuntu-latest, macOS-latest]
         os: [macOS-latest]
+        python: [3.6, 3.7, 3.8, 3.9]
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python 3.6
+    - name: Set up Python ${{ matrix.python }}
       uses: actions/setup-python@v2
       with:
-        python-version: 3.6
+        python-version: ${{ matrix.python }}
     - name: Install homebrew
       run: |
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
