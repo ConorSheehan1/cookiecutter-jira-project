@@ -9,12 +9,12 @@
 {{cookiecutter.project_name|lower}}_retro_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/retro"
 
 goto_{{cookiecutter.project_name|lower}}_issues() {
-  cd "${{cookiecutter.project_name|lower}}_issue_dir" || exit
+  cd "${{cookiecutter.project_name|lower}}_issue_dir" || return
 }
 
 goto_{{cookiecutter.project_name|lower}}_current_issue() {
   current_issue=$(tail -n 1 "${{cookiecutter.project_name|lower}}_issue_log")
-  cd "${{cookiecutter.project_name|lower}}_issue_dir/$current_issue" || exit
+  cd "${{cookiecutter.project_name|lower}}_issue_dir/$current_issue" || return
 }
 
 {{cookiecutter.project_name|lower}}_current_issue() {
@@ -33,7 +33,7 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
   new_issue_tech_design="$new_issue_dir/tech.md"
 
   echo "$1" >> "${{cookiecutter.project_name|lower}}_issue_log"
-  cd "${{cookiecutter.project_name|lower}}_repo_dir" || exit
+  cd "${{cookiecutter.project_name|lower}}_repo_dir" || return
   git stash save "pre $1"
   git checkout master
   git pull
