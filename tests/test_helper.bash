@@ -127,7 +127,7 @@ setup() {
             rm -rf "$example_dir"
         fi
         # setup example project so utils.sh exists and can be tested
-        poetry run cookiecutter . --overwrite-if-exists --no-input base_dir="$PWD"
+        poetry run cookiecutter . --overwrite-if-exists --no-input base_dir="$PWD" editor="echo"
     fi
 
     # load functions to be tested

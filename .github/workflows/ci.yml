@@ -42,9 +42,9 @@ jobs:
         brew unlink bats
         brew install --force bats-core
       if: matrix.os == 'macOS-latest'
-    - name: ubuntu install bats
-      run: |
-        brew install bats
+    # - name: ubuntu install bats
+    #   run: |
+    #     brew install bats
     - name: Install Poetry
       run: |
         python -m pip install --upgrade pip
@@ -55,4 +55,5 @@ jobs:
     - name: Test
       run: |
         # bats -r does not follow symlinks, pass paths explicitly using find
+        # test_helper.bash setUp function handles creating the project under test using cookiecutter
         bats $(find ./tests -name '*.bats' | sort)
