@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# template version 0.1.0
+# template version 0.1.1
 
 {{cookiecutter.project_name|lower}}_repo_dir="{{cookiecutter.repo_dir}}"
 # TODO: get basedir instead of passing in as arg
@@ -9,12 +9,12 @@
 {{cookiecutter.project_name|lower}}_retro_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/retro"
 
 goto_{{cookiecutter.project_name|lower}}_issues() {
-  cd "${{cookiecutter.project_name|lower}}_issue_dir" || exit
+  cd "${{cookiecutter.project_name|lower}}_issue_dir" || return 1
 }
 
 goto_{{cookiecutter.project_name|lower}}_current_issue() {
   current_issue=$(tail -n 1 "${{cookiecutter.project_name|lower}}_issue_log")
-  cd "${{cookiecutter.project_name|lower}}_issue_dir/$current_issue" || exit
+  cd "${{cookiecutter.project_name|lower}}_issue_dir/$current_issue" || return 1
 }
 
 {{cookiecutter.project_name|lower}}_current_issue() {
@@ -33,17 +33,17 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
   new_issue_tech_design="$new_issue_dir/tech.md"
 
   echo "$1" >> "${{cookiecutter.project_name|lower}}_issue_log"
-  cd "${{cookiecutter.project_name|lower}}_repo_dir" || exit
-  git stash save "pre $1"
-  git checkout master
-  git pull
-  git checkout -b "$1"
+  cd "${{cookiecutter.project_name|lower}}_repo_dir" || return 1
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" stash save "pre $1"
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout master
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" pull
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout -b "$1"
   echo making "$new_issue_dir"
   mkdir "$new_issue_dir"
   mkdir "$new_issue_dir/screenshots"
   touch "$new_issue_tech_design"
   # open dir to see all files too
-  code "$new_issue_dir" "$new_issue_tech_design"
+  {{cookiecutter.editor}} "$new_issue_dir" "$new_issue_tech_design"
 }
 
 {{cookiecutter.project_name|lower}}_new_retro() {
@@ -59,5 +59,5 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
   fi
   cp "$retro_template" "$new_retro"
   # open dir to see all files too
-  code "${{cookiecutter.project_name|lower}}_retro_dir" "$new_retro"
+  {{cookiecutter.editor}} "${{cookiecutter.project_name|lower}}_retro_dir" "$new_retro"
 }

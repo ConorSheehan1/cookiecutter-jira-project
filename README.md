@@ -36,10 +36,10 @@ Provides the following functions
     1. pull master
     1. create new branch
     1. create new issue dir
-    1. open in vscode
+    1. open in editor
 1. `$your_project_new_retro`
     1. create retro from template
-    1. open in vscode
+    1. open in editor
 
 # Development
 See [dev.md](./dev.md)
