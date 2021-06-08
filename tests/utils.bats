@@ -13,16 +13,17 @@ load "test_helper"
 
 @test "alphabet_new_retro" {
   # only the template exists
-  assert_equal '1' "$(ls $alphabet_retro_dir | wc -l)"
+  # pipe to xargs to trim spaces (on osx)
+  assert_equal '1' "$(ls $alphabet_retro_dir | wc -l | xargs)"
 
   alphabet_new_retro
   # the template and the new retro exists
-  assert_equal '2' "$(ls $alphabet_retro_dir | wc -l)"
+  assert_equal '2' "$(ls $alphabet_retro_dir | wc -l | xargs)"
 }
 
 @test "alphabet_new_issue_fail_regex" {
   # only issue_log exists
-  assert_equal '1' "$(ls $alphabet_issue_dir | wc -l)"
+  assert_equal '1' "$(ls $alphabet_issue_dir | wc -l | xargs)"
 
   # need run to assert failure
   run alphabet_new_issue "asdf"
@@ -30,13 +31,13 @@ load "test_helper"
   assert_output "asdf must match ^ABC-([0-9]+)(.*)+"
 
   # no issue created, only issue_log exists
-  assert_equal '1' "$(ls $alphabet_issue_dir | wc -l)"
+  assert_equal '1' "$(ls $alphabet_issue_dir | wc -l | xargs)"
   assert_failure
 }
 
 @test "alphabet_new_issue" {
   # only issue_log exists
-  assert_equal '1' "$(ls $alphabet_issue_dir | wc -l)"
+  assert_equal '1' "$(ls $alphabet_issue_dir | wc -l | xargs)"
 
   alphabet_new_issue "ABC-123"
 
@@ -47,7 +48,7 @@ load "test_helper"
   assert_file_exist "$alphabet_issue_dir/ABC-123/tech.md"
 
   # should have exactly 2 directories in issues, the template and the new issue (ABC-123)
-  assert_equal '2' "$(ls $alphabet_issue_dir | wc -l)"
+  assert_equal '2' "$(ls $alphabet_issue_dir | wc -l | xargs)"
 }
 
 @test "goto_current_issue" {
