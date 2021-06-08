@@ -9,12 +9,12 @@
 {{cookiecutter.project_name|lower}}_retro_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/retro"
 
 goto_{{cookiecutter.project_name|lower}}_issues() {
-  cd "${{cookiecutter.project_name|lower}}_issue_dir" || return
+  cd "${{cookiecutter.project_name|lower}}_issue_dir" || return 1
 }
 
 goto_{{cookiecutter.project_name|lower}}_current_issue() {
   current_issue=$(tail -n 1 "${{cookiecutter.project_name|lower}}_issue_log")
-  cd "${{cookiecutter.project_name|lower}}_issue_dir/$current_issue" || return
+  cd "${{cookiecutter.project_name|lower}}_issue_dir/$current_issue" || return 1
 }
 
 {{cookiecutter.project_name|lower}}_current_issue() {
@@ -33,11 +33,11 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
   new_issue_tech_design="$new_issue_dir/tech.md"
 
   echo "$1" >> "${{cookiecutter.project_name|lower}}_issue_log"
-  cd "${{cookiecutter.project_name|lower}}_repo_dir" || return
-  git stash save "pre $1"
-  git checkout master
-  git pull
-  git checkout -b "$1"
+  cd "${{cookiecutter.project_name|lower}}_repo_dir" || return 1
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" stash save "pre $1"
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout master
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" pull
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout -b "$1"
   echo making "$new_issue_dir"
   mkdir "$new_issue_dir"
   mkdir "$new_issue_dir/screenshots"

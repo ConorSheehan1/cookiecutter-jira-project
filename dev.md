@@ -13,6 +13,18 @@ bats $(find ./tests -name '*.bats' | sort)
 poetry run task tests
 ```
 
+### Debugging tests
+```bat
+# https://github.com/sstephenson/bats/issues/191
+# note test must fail to see output, which is why we need [ "$status" -eq 0 ]
+@test 'test-a' {
+  run bash -c 'echo ERROR; false'
+  echo "status = ${status}"
+  echo "output = ${output}"
+  [ "$status" -eq 0 ]
+}
+```
+
 # Version management
 ```bash
 # pass args e.g. patch, minor, major, choose to commit changes or not
