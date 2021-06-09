@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# this hook aborts commits which do not include a jira issue
+# e.g. {{cookiecutter.jira_code}}-123
+
+INPUT_FILE=$1
+START_LINE=$(head -n1 "$INPUT_FILE")
+PATTERN="{{cookiecutter.jira_code}}-[0-9]+"
+
+# last commit is available at .git/COMMIT_EDITMSG, but historic failures aren't
+# so add dump_file with timestamp
+DUMP_FILE="/tmp/commit_msg_dump_$(date "+%Y-%m-%d.%H%M").txt"
+
+# Redirect output to stderr.
+exec 1>&2
+
+if ! [[ "$START_LINE" =~ $PATTERN ]]; then
+    echo "ERROR: Validation Failed."
+    echo "Commit messages must include an issue number that matches $PATTERN e.g. {{cookiecutter.jira_code}}-123."
+    if [[ -z $BATS_TEST_DIRNAME ]]; then
+        echo "Dumping commit message from $INPUT_FILE to $DUMP_FILE"
+        cat "$INPUT_FILE" > "$DUMP_FILE"
+    fi
+    echo "To override this check add the --no-verify flag."
+    exit 1
+fi
