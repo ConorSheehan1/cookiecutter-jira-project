@@ -1,7 +1,9 @@
 # cookiecutter-jira-project
 [![Build Status](https://github.com/ConorSheehan1/cookiecutter-jira-project/workflows/ci/badge.svg)](https://github.com/ConorSheehan1/cookiecutter-jira-project/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tested python versions](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/ConorSheehan1/cookiecutter-jira-project/master/.github/workflows/ci.yml&label=Tested%20python%20versions&query=$.jobs.build.strategy.matrix.python)](https://github.com/ConorSheehan1/cookiecutter-jira-project/blob/master/.github/workflows/ci.yml#L13)
+[![Tested python versions](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/ConorSheehan1/cookiecutter-jira-project/master/.github/workflows/ci.yml&label=Tested%20python%20versions&query=$.jobs.build.strategy.matrix.python)](https://github.com/ConorSheehan1/cookiecutter-jira-project/blob/master/.github/workflows/ci.yml#L27)
+[![OS](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/ConorSheehan1/cookiecutter-jira-project/master/.github/workflows/ci.yml&label=OS&query=$.jobs.build.strategy.matrix.os)](https://github.com/ConorSheehan1/cookiecutter-jira-project/blob/master/.github/workflows/ci.yml#L26)
+
 
 A [cookiecutter](https://github.com/audreyr/cookiecutter) template for creating a directory structure and bash scripts to help manage jira projects.
 
