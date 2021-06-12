@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# template version 0.1.1
+# template version 0.1.2
 
 {{cookiecutter.project_name|lower}}_repo_dir="{{cookiecutter.repo_dir}}"
 # TODO: get basedir instead of passing in as arg
