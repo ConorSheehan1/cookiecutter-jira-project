@@ -25,6 +25,8 @@ source "$your_project_dir/utils.sh"
 ```
 
 Provides the following functions
+1. `goto_$your_project_repo`
+    1. cd to repo dir
 1. `goto_$your_project_issues`
     1. cd to issue dir
 1. `goto_$your_project_current_issue`
@@ -34,7 +36,7 @@ Provides the following functions
 1. `$your_project_new_issue`
     1. stash changes
     1. pull master
-    1. create new branch
+    1. create new branch (defaults to feature/$issue_name)
     1. create new issue dir
     1. open in editor
 1. `$your_project_new_retro`

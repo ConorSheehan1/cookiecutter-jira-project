@@ -8,6 +8,10 @@
 {{cookiecutter.project_name|lower}}_issue_log="${{cookiecutter.project_name|lower}}_issue_dir/issue_log"
 {{cookiecutter.project_name|lower}}_retro_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/retro"
 
+goto_{{cookiecutter.project_name|lower}}_repo() {
+  cd "${{cookiecutter.project_name|lower}}_repo_dir" || return 1
+}
+
 goto_{{cookiecutter.project_name|lower}}_issues() {
   cd "${{cookiecutter.project_name|lower}}_issue_dir" || return 1
 }
@@ -29,15 +33,18 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
     return 1
   fi
 
-  new_issue_dir="${{cookiecutter.project_name|lower}}_issue_dir/$1"
+  issue_name="$1"
+  branch_type="${2:-feature}"
+
+  new_issue_dir="${{cookiecutter.project_name|lower}}_issue_dir/$issue_name"
   new_issue_tech_design="$new_issue_dir/tech.md"
 
-  echo "$1" >> "${{cookiecutter.project_name|lower}}_issue_log"
+  echo "$issue_name" >> "${{cookiecutter.project_name|lower}}_issue_log"
   cd "${{cookiecutter.project_name|lower}}_repo_dir" || return 1
-  git -C "${{cookiecutter.project_name|lower}}_repo_dir" stash save "pre $1"
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" stash save "pre $branch_type/$issue_name"
   git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout master
   git -C "${{cookiecutter.project_name|lower}}_repo_dir" pull
-  git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout -b "$1"
+  git -C "${{cookiecutter.project_name|lower}}_repo_dir" checkout -b "$branch_type/$issue_name"
   echo making "$new_issue_dir"
   mkdir "$new_issue_dir"
   mkdir "$new_issue_dir/screenshots"
