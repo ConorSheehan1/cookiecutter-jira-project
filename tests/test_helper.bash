@@ -212,7 +212,6 @@ setup() {
         poetry run cookiecutter . \
             --overwrite-if-exists \
             --no-input \
-            base_dir="$PWD" \
             repo_dir="$repo_dir" \
             editor="echo"
 

@@ -3,10 +3,9 @@
 # template version 0.1.2
 
 {{cookiecutter.project_name|lower}}_repo_dir="{{cookiecutter.repo_dir}}"
-# TODO: get basedir instead of passing in as arg
-{{cookiecutter.project_name|lower}}_issue_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/issues"
+{{cookiecutter.project_name|lower}}_issue_dir="replace_me.base_dir/issues"
 {{cookiecutter.project_name|lower}}_issue_log="${{cookiecutter.project_name|lower}}_issue_dir/issue_log"
-{{cookiecutter.project_name|lower}}_retro_dir="{{cookiecutter.base_dir}}/{{cookiecutter.project_name|lower}}/retro"
+{{cookiecutter.project_name|lower}}_retro_dir="replace_me.base_dir/retro"
 
 goto_{{cookiecutter.project_name|lower}}_repo() {
   cd "${{cookiecutter.project_name|lower}}_repo_dir" || return 1
