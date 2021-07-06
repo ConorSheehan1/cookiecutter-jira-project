@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# template version 0.1.2
+# template version 0.2.0
 
 {{cookiecutter.project_name|lower}}_repo_dir="{{cookiecutter.repo_dir}}"
 {{cookiecutter.project_name|lower}}_issue_dir="replace_me.base_dir/issues"
