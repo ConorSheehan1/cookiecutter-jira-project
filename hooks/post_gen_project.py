@@ -5,6 +5,7 @@ project_name = '{{cookiecutter.project_name}}'
 repo_dir = '{{cookiecutter.repo_dir}}'
 project_path = f'{base_dir}/{project_name}'
 
+# https://github.com/cookiecutter/cookiecutter/issues/955
 for root, dirs, files in os.walk(base_dir):
     for filename in files:
         # read file content
