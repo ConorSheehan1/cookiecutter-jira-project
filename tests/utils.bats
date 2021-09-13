@@ -94,3 +94,7 @@ load "test_helper"
   # should have stashed changes if they exist
   assert_equal "stash@{0}: On ABC-001-cat: pre feature/ABC-456789" "$(git --no-pager -C $alphabet_repo_dir stash list -1)"
 }
+
+@test "alphabet_version" {
+  assert_equal "$(alphabet_version)" "0.2.0"
+}
