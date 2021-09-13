@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# template version 0.2.0
+{{cookiecutter.project_name|lower}}_version="0.2.0"
 
 {{cookiecutter.project_name|lower}}_repo_dir="{{cookiecutter.repo_dir}}"
 {{cookiecutter.project_name|lower}}_issue_dir="replace_me.base_dir/issues"
@@ -22,6 +22,10 @@ goto_{{cookiecutter.project_name|lower}}_current_issue() {
 
 {{cookiecutter.project_name|lower}}_current_issue() {
   tail -n 1 "${{cookiecutter.project_name|lower}}_issue_log"
+}
+
+{{cookiecutter.project_name|lower}}_version() {
+  echo "${{cookiecutter.project_name|lower}}_version"
 }
 
 {{cookiecutter.project_name|lower}}_new_issue() {
