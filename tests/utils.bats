@@ -33,7 +33,8 @@ load "test_helper"
   # need run to assert failure
   run alphabet_new_issue "asdf"
 
-  assert_output "asdf must match ^ABC-([0-9]+)(.*)+"
+  assert_output "asdf must match ^ABC-([0-9]+)(.*)+
+usage: branch_type=feature upstream_branch=master alphabet_new_issue ABC-123-some-bug"
 
   # no issue created, only issue_log exists
   assert_equal '1' "$(ls $alphabet_issue_dir | wc -l | xargs)"
@@ -46,7 +47,7 @@ load "test_helper"
   # only issue_log exists
   assert_equal '1' "$(ls $alphabet_issue_dir | wc -l | xargs)"
 
-  alphabet_new_issue "ABC-123"
+  no_prompt="true" alphabet_new_issue "ABC-123"
 
   # should be on new branch
   assert_equal "feature/ABC-123" "$(git -C $alphabet_repo_dir symbolic-ref --short HEAD)"
@@ -58,28 +59,28 @@ load "test_helper"
   assert_equal '2' "$(ls $alphabet_issue_dir | wc -l | xargs)"
 }
 
-@test "alphabet_new_issue bug" {
+@test "alphabet_new_issue bugfix" {
   # issue should not exist yet
   assert_file_not_exist "$alphabet_issue_dir/ABC-100-bugs/tech.md"
 
-  alphabet_new_issue "ABC-100-bugs" "bug"
+  no_prompt="true" branch_type="bugfix" alphabet_new_issue "ABC-100-bugs"
 
   # should be on new branch of type bug
-  assert_equal "bug/ABC-100-bugs" "$(git -C $alphabet_repo_dir symbolic-ref --short HEAD)"
+  assert_equal "bugfix/ABC-100-bugs" "$(git -C $alphabet_repo_dir symbolic-ref --short HEAD)"
 
   # should create tech design file
   assert_file_exist "$alphabet_issue_dir/ABC-100-bugs/tech.md"
 }
 
 @test "goto_current_issue" {
-  alphabet_new_issue "ABC-222"
+  no_prompt="true" alphabet_new_issue "ABC-222"
   goto_alphabet_current_issue
 
   assert_equal "$alphabet_issue_dir/ABC-222" "$PWD"
 }
 
 @test "current_issue" {
-  alphabet_new_issue "ABC-001-cat"
+  no_prompt="true" alphabet_new_issue "ABC-001-cat"
 
   assert_equal "ABC-001-cat" "$(alphabet_current_issue)"
 }
@@ -89,7 +90,7 @@ load "test_helper"
   touch "$alphabet_repo_dir/asdf"
   git -C "$alphabet_repo_dir" add "$alphabet_repo_dir/asdf"
 
-  alphabet_new_issue "ABC-456789"
+  no_prompt="true" alphabet_new_issue "ABC-456789"
 
   # should have stashed changes if they exist
   assert_equal "stash@{0}: On ABC-001-cat: pre feature/ABC-456789" "$(git --no-pager -C $alphabet_repo_dir stash list -1)"
