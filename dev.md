@@ -7,6 +7,7 @@ poetry run cookiecutter .
 
 # Tests
 ```bash
+# tested with bats-core 1.2.1
 bats $(find ./tests -name '*.bats' | sort)
 
 # alias for the above, can also be used

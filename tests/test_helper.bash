@@ -60,6 +60,14 @@ assert_output() {
     assert_equal "$expected" "$output"
 }
 
+assert_partial_output() {
+    local expected
+    if [ $# -eq 0 ]; then expected="$(cat -)"
+    else expected="$1"
+    fi
+    assert_partial "$expected" "$output"
+}
+
 assert_line() {
     if [ "$1" -ge 0 ] 2>/dev/null; then
         assert_equal "$2" "${lines[$1]}"
