@@ -1,4 +1,4 @@
-<!-- template version 0.2.0 -->
+<!-- template version 1.0.0 -->
 # continue
 
 # start 

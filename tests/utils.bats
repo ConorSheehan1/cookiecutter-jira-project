@@ -113,5 +113,5 @@ usage: branch_type=feature upstream_branch=master alphabet_new_issue ABC-123-som
 }
 
 @test "alphabet_version" {
-  assert_equal "$(alphabet_version)" "0.2.0"
+  assert_equal "$(alphabet_version)" "1.0.0"
 }

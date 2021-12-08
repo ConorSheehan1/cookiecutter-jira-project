@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cookiecutter-jira-project"
-version = "0.2.0"
+version = "1.0.0"
 description = "A cookiecutter template for managing jira projects locally"
 authors = ["Conor Sheehan <conor.sheehan.dev@gmail.com>"]
 license = "MIT"
