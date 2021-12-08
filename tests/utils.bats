@@ -10,7 +10,6 @@ load "test_helper"
   assert_equal "$alphabet_repo_dir" "$PWD"
 }
 
-
 @test "goto_alphabet_issues" {
   goto_alphabet_issues
   assert_equal "$alphabet_issue_dir" "$PWD"
@@ -37,6 +36,7 @@ load "test_helper"
 usage: branch_type=feature upstream_branch=master alphabet_new_issue ABC-123-some-bug"
 
   # no issue created, only issue_log exists
+  # note tests run in order, so each test that successfully creates an issue will increase the number below
   assert_equal '1' "$(ls $alphabet_issue_dir | wc -l | xargs)"
   assert_failure
 }
@@ -70,6 +70,22 @@ usage: branch_type=feature upstream_branch=master alphabet_new_issue ABC-123-som
 
   # should create tech design file
   assert_file_exist "$alphabet_issue_dir/ABC-100-bugs/tech.md"
+  assert_equal '3' "$(ls $alphabet_issue_dir | wc -l | xargs)"
+}
+
+@test "alphabet_new_issue_invalid_branch_type" {
+  # note should be bugfix to match bitbucket branch types
+  no_prompt="true" branch_type="bug" alphabet_new_issue "ABC-123-some-bug"
+
+  assert_partial_output "Warning: invalid branch_type: bug. using default 'feature'"
+
+  # note: this is usually caught by the select, which allows the user to exit early if they don't like the defaults
+  # should be on new branch
+  assert_equal "feature/ABC-123-some-bug" "$(git -C $alphabet_repo_dir symbolic-ref --short HEAD)"
+
+  # should create tech design file
+  assert_file_exist "$alphabet_issue_dir/ABC-123-some-bug/tech.md"
+  assert_equal '4' "$(ls $alphabet_issue_dir | wc -l | xargs)"
 }
 
 @test "goto_current_issue" {
